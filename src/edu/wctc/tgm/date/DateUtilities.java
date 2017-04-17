@@ -88,16 +88,18 @@ public class DateUtilities {
     }
     /**
      * Accepts a long to calculate how many years ahead of todays date you want, and outputs the appropriate future LocalDateTime object 
-     * @param yearsAhead - pass how many years ahead you want
      * @param timea - pass a starting time
+     * @param yearsAhead - pass how many years ahead you want
+     * @param monthsAhead - ""     ""    months     ""
+     * @param daysAhead -   ""     ""    days       ""
      * @return appropriate LocalDateTime object in the future
      * @throws IllegalArgument exception if yearsAhead is less than 0
      */
-    public LocalDateTime yearsAhead(LocalDateTime timea, long yearsAhead) {
+    public LocalDateTime yearsAhead(LocalDateTime timea, long yearsAhead, long monthsAhead, long daysAhead) {
         if(timea != null || yearsAhead > 0)
         {
             LocalDateTime time = null;
-            time = timea.plusYears(yearsAhead);
+            time = timea.plusYears(yearsAhead).plusMonths(monthsAhead).plusDays(daysAhead);
             return time;
         } else {
             throw new IllegalArgumentException("Arguments can not be null or less than 0");
