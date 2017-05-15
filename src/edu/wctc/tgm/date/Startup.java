@@ -18,9 +18,9 @@ public class Startup {
         LocalDateTime datea = du.toLocalDateTime("2014 02 14");
         LocalDateTime dateb = du.toLocalDateTime("2014 02 19");
         
-        du.timeDifference(datea, dateb);
         
-        du.toString(du.yearsAhead(datea, 50, 3, 5));
+        
+        
     }
   
 }

@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * <P>
@@ -72,15 +73,19 @@ public class DateUtilities {
         
     }
     /**
-     * Accepts 2 LocalDateTime objects and outputs the difference between them in a string
+     * Accepts 2 LocalDateTime objects and returns hours
      * @param timea
      * @param timeb
-     * Times to calculate difference between
+     * @return double
+     * The difference between the two LocalDateTime objects in hours and minutes
+     * 
      */
-    public void timeDifference(LocalDateTime timea, LocalDateTime timeb) {
+    public double timeDifferenceHoursAndMinutes(LocalDateTime timea, LocalDateTime timeb) {
         if (timea != null || timeb != null){
             Duration diff = Duration.between(timea, timeb);
-            System.out.println("Difference in days is " + diff.toDays());          
+            //converts the duration object into a double representing hours and minutes
+            return (diff.toHours() + (((Double.parseDouble((Long.toString(diff.getSeconds()))) % 3600) / 60) / 60));
+            
         } else {
             throw new IllegalArgumentException("Times can't be null");
         }
@@ -106,4 +111,29 @@ public class DateUtilities {
         }
 
     }
+    
+    public LocalDateTime hoursAhead(LocalDateTime timea, double hours) {
+        if(timea != null)
+        {
+            double calcHours = Math.floor(hours);
+            double calcMin = 60 * (hours - (double)(Math.floor(hours)));
+            LocalDateTime time = timea.plusHours((long) calcHours); 
+            time = time.plusMinutes((long) calcMin);
+            return time;
+        } else {
+            throw new IllegalArgumentException("Arguments can not be null or less than 0");
+        }
+
+    }
+    
+        public final double generateRandomDoubleBetween1And24(){
+            
+            double start = 1;
+            double end = 24;
+            double random = new Random().nextDouble();
+            double results = start + (random * (end - start));
+            return results;
+        }
+        
+        
 }
